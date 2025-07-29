@@ -20,12 +20,12 @@ defmodule YTPod.DataCase do
 
   using do
     quote do
-      alias YTPod.Repo
-
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
       import YTPod.DataCase
+
+      alias YTPod.Repo
     end
   end
 
