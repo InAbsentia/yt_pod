@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   check-formatting:
-    name: Check formatting & style
+    name: Check formatting
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -37,6 +37,27 @@ jobs:
       run: mix compile
     - name: Run format check
       run: mix format --check-formatted
+
+  check-style:
+    name: Check style
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        version-file: .tool-versions
+        version-type: strict
+    - name: Restore dependencies cache
+      uses: actions/cache@v3
+      with:
+        path: deps
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-mix-
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Compile app
+      run: mix compile
     - name: Run style check
       run: mix credo --strict
 
