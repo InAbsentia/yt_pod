@@ -1,5 +1,24 @@
 import Config
+
+alias Swoosh.Adapters.Test
+
 config :ash, policies: [show_policy_breakdowns?: true]
+
+# Print only warnings and errors during test
+config :logger, level: :warning
+
+# Initialize plugs at runtime for faster test compilation
+config :phoenix, :plug_init_mode, :runtime
+
+# Enable helpful, but potentially expensive runtime checks
+config :phoenix_live_view,
+  enable_expensive_runtime_checks: true
+
+# Disable swoosh api client as it is only required for production adapters
+config :swoosh, :api_client, false
+
+# In test we don't send emails
+config :yt_pod, YTPod.Mailer, adapter: Test
 
 # Configure your database
 #
@@ -20,19 +39,3 @@ config :yt_pod, YTPodWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "BO9DnSN7z4NDdtNyM4TOo7TAN2hwoB//PsJ45IbFCmPuFVieLDXGAgaoFGC10Xgv",
   server: false
-
-# In test we don't send emails
-config :yt_pod, YTPod.Mailer, adapter: Swoosh.Adapters.Test
-
-# Disable swoosh api client as it is only required for production adapters
-config :swoosh, :api_client, false
-
-# Print only warnings and errors during test
-config :logger, level: :warning
-
-# Initialize plugs at runtime for faster test compilation
-config :phoenix, :plug_init_mode, :runtime
-
-# Enable helpful, but potentially expensive runtime checks
-config :phoenix_live_view,
-  enable_expensive_runtime_checks: true

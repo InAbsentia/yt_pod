@@ -1,6 +1,10 @@
 defmodule YTPodWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :yt_pod
 
+  alias Phoenix.Ecto.CheckRepoStatus
+  alias Phoenix.LiveDashboard.RequestLogger
+  alias Phoenix.LiveView.Socket
+
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
@@ -11,7 +15,7 @@ defmodule YTPodWeb.Endpoint do
     same_site: "Lax"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket,
+  socket "/live", Socket,
     websocket: [connect_info: [session: @session_options]],
     longpoll: [connect_info: [session: @session_options]]
 
@@ -32,10 +36,10 @@ defmodule YTPodWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :yt_pod
+    plug CheckRepoStatus, otp_app: :yt_pod
   end
 
-  plug Phoenix.LiveDashboard.RequestLogger,
+  plug RequestLogger,
     param_key: "request_logger",
     cookie_key: "request_logger"
 

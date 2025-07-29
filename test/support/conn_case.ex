@@ -19,15 +19,15 @@ defmodule YTPodWeb.ConnCase do
 
   using do
     quote do
-      # The default endpoint for testing
-      @endpoint YTPodWeb.Endpoint
-
       use YTPodWeb, :verified_routes
 
       # Import conveniences for testing with connections
-      import Plug.Conn
       import Phoenix.ConnTest
+      import Plug.Conn
       import YTPodWeb.ConnCase
+
+      # The default endpoint for testing
+      @endpoint YTPodWeb.Endpoint
     end
   end
 
