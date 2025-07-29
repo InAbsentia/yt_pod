@@ -1,12 +1,13 @@
 defmodule YTPodWeb.Telemetry do
   use Supervisor
+
   import Telemetry.Metrics
 
   def start_link(arg) do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
 
-  @impl true
+  @impl Supervisor
   def init(_arg) do
     children = [
       # Telemetry poller will execute the given period measurements
@@ -71,8 +72,7 @@ defmodule YTPodWeb.Telemetry do
       ),
       summary("yt_pod.repo.query.idle_time",
         unit: {:native, :millisecond},
-        description:
-          "The time the connection spent waiting before being checked out for the query"
+        description: "The time the connection spent waiting before being checked out for the query"
       ),
 
       # VM Metrics

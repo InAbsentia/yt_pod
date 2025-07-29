@@ -1,4 +1,8 @@
 defmodule YTPod.Schema do
+  @moduledoc """
+  Use this in Ecto schemas to set common configuration options.
+  """
+
   defmacro __using__(_) do
     quote do
       use Ecto.Schema
