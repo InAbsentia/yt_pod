@@ -87,4 +87,4 @@ config :yt_pod, YTPodWeb.Endpoint,
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :yt_pod, dev_routes: true
+config :yt_pod, dev_routes: true, token_signing_secret: "kmvYFZNpbmG8Fip4aqrTUe77ifdqJ3YC"
