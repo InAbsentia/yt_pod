@@ -47,6 +47,14 @@ config :yt_pod, YTPodWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "B04F0IzZIaPS0GD4QWBXJnhGEOfTuXd6gBOZfFD7fHP5er24Ww6LuVXYI3HndjRc",
+  live_reload: [
+    web_console_logger: true,
+    patterns: [
+      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/yt_pod_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$"
+    ]
+  ],
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:yt_pod, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:yt_pod, ~w(--watch)]}
@@ -74,17 +82,6 @@ config :yt_pod, YTPodWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
-# Watch static and templates for browser reloading.
-config :yt_pod, YTPodWeb.Endpoint,
-  live_reload: [
-    web_console_logger: true,
-    patterns: [
-      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/yt_pod_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$"
-    ]
-  ]
 
 # Enable dev routes for dashboard and mailbox
 config :yt_pod, dev_routes: true
