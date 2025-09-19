@@ -49,6 +49,12 @@ config :yt_pod, YTPodWeb.Endpoint,
   secret_key_base: "B04F0IzZIaPS0GD4QWBXJnhGEOfTuXd6gBOZfFD7fHP5er24Ww6LuVXYI3HndjRc",
   live_reload: [
     web_console_logger: true,
+    notify: [
+      live_view: [
+        ~r"lib/yt_pod_web/core_components.ex$",
+        ~r"lib/yt_pod_web/(live|components)/.*(ex|heex)$"
+      ]
+    ],
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
