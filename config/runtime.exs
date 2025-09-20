@@ -45,6 +45,27 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
+  auth_sender_name = System.fetch_env!("AUTH_SENDER_NAME")
+  auth_sender_address = System.fetch_env!("AUTH_SENDER_ADDRESS")
+
+  # ## Configuring the mailer
+  #
+  # In production you need to configure the mailer to use a different adapter.
+  # Here is an example configuration for Mailgun:
+  #
+  config :yt_pod, YTPod.Mailer, auth_sender: {auth_sender_name, auth_sender_address}
+  #       adapter: Swoosh.Adapters.Mailgun,
+  #       api_key: System.get_env("MAILGUN_API_KEY"),
+  #       domain: System.get_env("MAILGUN_DOMAIN"),
+  #
+  # Most non-SMTP adapters require an API client. Swoosh supports Req, Hackney,
+  # and Finch out-of-the-box. This configuration is typically done at
+  # compile-time in your config/prod.exs:
+  #
+  #     config :swoosh, :api_client, Swoosh.ApiClient.Req
+  #
+  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
   config :yt_pod, YTPod.Repo,
     # ssl: true,
     url: database_url,
@@ -103,22 +124,4 @@ if config_env() == :prod do
   #       force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
-
-  # ## Configuring the mailer
-  #
-  # In production you need to configure the mailer to use a different adapter.
-  # Here is an example configuration for Mailgun:
-  #
-  #     config :yt_pod, YTPod.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # Most non-SMTP adapters require an API client. Swoosh supports Req, Hackney,
-  # and Finch out-of-the-box. This configuration is typically done at
-  # compile-time in your config/prod.exs:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Req
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
