@@ -45,12 +45,13 @@ defmodule YTPodWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
     auth_routes AuthController, User, path: "/auth"
     sign_out_route AuthController
 
     # Remove these if you'd like to use your own authentication views
-    sign_in_route register_path: "/register",
-                  reset_path: "/reset",
+    sign_in_route register_path: "/accounts/new",
+                  reset_path: "/accounts/reset",
                   auth_routes_prefix: "/auth",
                   on_mount: [{YTPodWeb.LiveUserAuth, :live_no_user}],
                   overrides: [YTPodWeb.AuthOverrides, DaisyUI]
