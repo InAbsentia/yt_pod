@@ -10,7 +10,7 @@ defmodule YTPod.Accounts.User.Senders.SendNewUserConfirmationEmail do
 
   alias YTPod.Mailer
 
-  @impl true
+  @impl AshAuthentication.Sender
   def send(user, token, _) do
     new()
     # TODO: Replace with your email

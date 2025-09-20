@@ -1,4 +1,6 @@
 defmodule YTPod.Accounts do
+  @moduledoc false
+
   use Ash.Domain,
     otp_app: :yt_pod
 

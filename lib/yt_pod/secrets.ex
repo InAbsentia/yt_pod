@@ -1,4 +1,6 @@
 defmodule YTPod.Secrets do
+  @moduledoc false
+
   use AshAuthentication.Secret
 
   alias YTPod.Accounts.User
