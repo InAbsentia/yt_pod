@@ -83,7 +83,9 @@ config :tailwind,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :yt_pod, YTPod.Mailer, adapter: Local
+config :yt_pod, YTPod.Mailer,
+  adapter: Local,
+  auth_sender: {"No Reply", "noreply@example.com"}
 
 config :yt_pod, YTPod.Repo,
   migration_primary_key: :binary_id,
