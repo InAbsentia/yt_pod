@@ -4,6 +4,8 @@ alias Swoosh.Adapters.Test
 
 config :ash, policies: [show_policy_breakdowns?: true], disable_async?: true
 
+config :bcrypt_elixir, log_rounds: 1
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
@@ -39,3 +41,5 @@ config :yt_pod, YTPodWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "BO9DnSN7z4NDdtNyM4TOo7TAN2hwoB//PsJ45IbFCmPuFVieLDXGAgaoFGC10Xgv",
   server: false
+
+config :yt_pod, token_signing_secret: "PCRlZ2nmXZZMgo5hajDcDYsgmjcHIo8r"

@@ -43,6 +43,8 @@ config :spark,
     remove_parens?: true,
     "Ash.Resource": [
       section_order: [
+        :authentication,
+        :tokens,
         :postgres,
         :resource,
         :code_interface,
@@ -102,7 +104,8 @@ config :yt_pod, YTPodWeb.Endpoint,
 config :yt_pod,
   namespace: YTPod,
   ecto_repos: [YTPod.Repo],
-  generators: [timestamp_type: :utc_datetime_usec, binary_id: true]
+  generators: [timestamp_type: :utc_datetime_usec, binary_id: true],
+  ash_domains: [YTPod.Accounts]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
