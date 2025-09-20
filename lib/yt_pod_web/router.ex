@@ -4,7 +4,7 @@ defmodule YTPodWeb.Router do
 
   import AshAuthentication.Plug.Helpers
 
-  alias AshAuthentication.Phoenix.Overrides.Default
+  alias AshAuthentication.Phoenix.Overrides.DaisyUI
   alias Plug.Swoosh.MailboxPreview
   alias YTPod.Accounts.User
 
@@ -53,22 +53,16 @@ defmodule YTPodWeb.Router do
                   reset_path: "/reset",
                   auth_routes_prefix: "/auth",
                   on_mount: [{YTPodWeb.LiveUserAuth, :live_no_user}],
-                  overrides: [YTPodWeb.AuthOverrides, Default]
+                  overrides: [YTPodWeb.AuthOverrides, DaisyUI]
 
     # Remove this if you do not want to use the reset password feature
     reset_route auth_routes_prefix: "/auth",
-                overrides: [YTPodWeb.AuthOverrides, Default]
+                overrides: [YTPodWeb.AuthOverrides, DaisyUI]
 
     # Remove this if you do not use the confirmation strategy
     confirm_route User, :confirm_new_user,
       auth_routes_prefix: "/auth",
-      overrides: [YTPodWeb.AuthOverrides, Default]
-
-    # Remove this if you do not use the magic link strategy.
-    magic_sign_in_route(User, :magic_link,
-      auth_routes_prefix: "/auth",
-      overrides: [YTPodWeb.AuthOverrides, Default]
-    )
+      overrides: [YTPodWeb.AuthOverrides, DaisyUI]
   end
 
   # Other scopes may use custom stacks.
