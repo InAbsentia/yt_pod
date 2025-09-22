@@ -43,6 +43,9 @@ config :spark,
     remove_parens?: true,
     "Ash.Resource": [
       section_order: [
+        :authentication,
+        :tokens,
+        :postgres,
         :resource,
         :code_interface,
         :actions,
@@ -80,7 +83,9 @@ config :tailwind,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :yt_pod, YTPod.Mailer, adapter: Local
+config :yt_pod, YTPod.Mailer,
+  adapter: Local,
+  auth_sender: {"No Reply", "noreply@example.com"}
 
 config :yt_pod, YTPod.Repo,
   migration_primary_key: :binary_id,
@@ -101,7 +106,8 @@ config :yt_pod, YTPodWeb.Endpoint,
 config :yt_pod,
   namespace: YTPod,
   ecto_repos: [YTPod.Repo],
-  generators: [timestamp_type: :utc_datetime_usec, binary_id: true]
+  generators: [timestamp_type: :utc_datetime_usec, binary_id: true],
+  ash_domains: [YTPod.Accounts]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

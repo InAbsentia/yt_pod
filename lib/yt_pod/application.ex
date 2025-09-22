@@ -15,7 +15,8 @@ defmodule YTPod.Application do
       # Start a worker by calling: YTPod.Worker.start_link(arg)
       # {YTPod.Worker, arg},
       # Start to serve requests, typically the last entry
-      YTPodWeb.Endpoint
+      YTPodWeb.Endpoint,
+      {AshAuthentication.Supervisor, [otp_app: :yt_pod]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -17,12 +17,16 @@ defmodule YTPodWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias AshAuthentication.Plug.Helpers
+  alias YTPod.Accounts.User
+
   using do
     quote do
       use YTPodWeb, :verified_routes
 
       # Import conveniences for testing with connections
       import Phoenix.ConnTest
+      import PhoenixTest
       import Plug.Conn
       import YTPodWeb.ConnCase
 
@@ -35,4 +39,38 @@ defmodule YTPodWeb.ConnCase do
     YTPod.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  def register_user do
+    email = default_email()
+    password = default_password()
+
+    {:ok, hashed_password} = AshAuthentication.BcryptProvider.hash(password)
+
+    Ash.Seed.seed!(User, %{
+      email: email,
+      hashed_password: hashed_password
+    })
+  end
+
+  def register_and_log_in_user(%{conn: conn} = context) do
+    %User{} = register_user()
+
+    strategy = AshAuthentication.Info.strategy!(User, :password)
+
+    {:ok, user} =
+      AshAuthentication.Strategy.action(strategy, :sign_in, %{
+        email: default_email(),
+        password: default_password()
+      })
+
+    new_conn =
+      conn
+      |> Phoenix.ConnTest.init_test_session(%{})
+      |> Helpers.store_in_session(user)
+
+    %{context | conn: new_conn}
+  end
+
+  def default_email, do: "user@example.com"
+  def default_password, do: "password"
 end
