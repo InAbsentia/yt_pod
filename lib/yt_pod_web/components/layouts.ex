@@ -61,7 +61,7 @@ defmodule YTPodWeb.Layouts do
             <% else %>
               <li>
                 <a href="/sign-in" class="btn btn-primary">
-                  Sign In
+                  Sign in
                 </a>
               </li>
 

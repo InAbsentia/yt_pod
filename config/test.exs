@@ -16,6 +16,8 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix_live_view,
   enable_expensive_runtime_checks: true
 
+config :phoenix_test, :endpoint, YTPodWeb.Endpoint
+
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
 

@@ -69,7 +69,8 @@ defmodule YTPod.MixProject do
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:quokka, "~> 2.9", only: [:dev, :test], runtime: false}
+      {:quokka, "~> 2.9", only: [:dev, :test], runtime: false},
+      {:phoenix_test, "~> 0.8.1", only: :test, runtime: false}
     ]
   end
 
