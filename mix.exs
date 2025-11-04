@@ -46,6 +46,7 @@ defmodule YTPod.MixProject do
       {:ash_authentication_phoenix, "~> 2.0"},
       {:ash_postgres, "~> 2.0"},
       {:sourceror, "~> 1.8", only: [:dev, :test]},
+      {:igniter, "~> 0.6", only: [:dev, :test]},
       {:ash, "~> 3.0"},
       {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.5"},
