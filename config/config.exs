@@ -88,9 +88,9 @@ config :yt_pod, YTPod.Mailer,
   auth_sender: {"No Reply", "noreply@example.com"}
 
 config :yt_pod, YTPod.Repo,
-  migration_primary_key: :binary_id,
-  migration_foreign_key: :binary_id,
-  migation_timestamps: :utc_datetime_usec
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id],
+  migation_timestamps: [type: :utc_datetime_usec]
 
 # Configures the endpoint
 config :yt_pod, YTPodWeb.Endpoint,
